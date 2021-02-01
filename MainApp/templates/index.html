@@ -1,0 +1,16 @@
+  
+{% extends "base.html" %}
+
+{% block title_head %}
+    MovieDatabase
+{% endblock %}
+
+{% block content %}
+    {%  if not user.is_authenticated %}
+        <li><a href="{% url 'login' %}">Sign in</a></li>
+        <li><a href="{% url 'signup' %}">Sign up</a></li>
+    {% else %}
+        <p>Content</p>
+    {% endif %}
+{% endblock %}
+
