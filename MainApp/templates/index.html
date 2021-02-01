@@ -10,7 +10,37 @@
         <li><a href="{% url 'login' %}">Sign in</a></li>
         <li><a href="{% url 'signup' %}">Sign up</a></li>
     {% else %}
-        <p>Content</p>
+        <form method="get" action=".">
+            <input type="text" value="Type movie title" name="title">
+            {% csrf_token %}
+            <input type="submit" value="Search">
+        </form>
+
+        <table class="table is-fullwidth is-striped is-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Type</th>
+                    <th>imdbID</th>
+                </tr>
+            </thead>
+    <tbody>
+    {% for movie in movie_info %}
+    <tr>
+        <th>{{ movie.Title}}</th>
+        <td>{{ movie.Year }}</td>
+        <td>{{ movie.Type}}</td>
+        <td>{{ movie.imdbID }}</td>
+        <td> <button type="button" class="btn btn-success">Add</button>
+</td>
+    </tr>
+
+
+    {% endfor %}
+    </tbody>
+</table>
+        <i class="bi bi-star"></i>
     {% endif %}
 {% endblock %}
 

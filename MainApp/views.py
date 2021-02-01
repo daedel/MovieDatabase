@@ -7,15 +7,16 @@ from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 from django.views.generic import TemplateView
 
-from MainApp.services import get_movie_info
+from MainApp.services import get_movie_info_by_title
 
 
 class MainView(TemplateView):
     template_name = "index.html"
 
     def get_context_data(self, *args, **kwargs):
+        title = self.request.GET.get("title")
         context = {
-            'movie_info': get_movie_info(),
+            'movie_info': get_movie_info_by_title(title),
         }
         return context
 
