@@ -1,5 +1,7 @@
+from django import template
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
@@ -8,6 +10,8 @@ from django.views.generic import TemplateView
 
 from MainApp.models import Movie
 from MainApp.services import get_movie_info_by_title, get_movie_info_by_id
+
+
 
 
 class MainView(TemplateView):
@@ -19,8 +23,19 @@ class MainView(TemplateView):
         if not title:
             return {}
 
+        page = self.request.GET.get("page")
+        per_page = self.request.GET.get("per_page", 3)
+        paginator = Paginator(get_movie_info_by_title(title), per_page)
+
+        try:
+            movie_info = paginator.page(page)
+        except PageNotAnInteger:
+            movie_info = paginator.page(1)
+        except EmptyPage:
+            movie_info = paginator.page(paginator.num_pages)
+
         context = {
-            'movie_info': get_movie_info_by_title(title),
+            'movie_info': movie_info,
         }
         return context
 
