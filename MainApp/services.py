@@ -13,7 +13,15 @@ def get_movie_info_by_title(title: str):
     response = requests.get(url).json()
 
     if "Search" in response:
-        return [Movie(Title=item["Title"], Year=item["Year"], Type=item["Type"], imdbID=item["imdbID"]) for item in response["Search"]]
+        return [
+            Movie(
+                Title=item["Title"],
+                Year=item["Year"],
+                Type=item["Type"],
+                imdbID=item["imdbID"],
+            )
+            for item in response["Search"]
+        ]
 
     return {}
 
@@ -24,4 +32,3 @@ def get_movie_info_by_id(movie_id: str) -> Union[Movie, HttpResponseNotFound]:
     response = requests.get(url).json()
 
     return response
-

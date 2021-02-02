@@ -7,18 +7,25 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Movie',
+            name="Movie",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('year', models.CharField(max_length=4)),
-                ('type', models.CharField(max_length=10)),
-                ('imbdId', models.CharField(max_length=11)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("year", models.CharField(max_length=4)),
+                ("type", models.CharField(max_length=10)),
+                ("imbdId", models.CharField(max_length=11)),
             ],
         ),
     ]

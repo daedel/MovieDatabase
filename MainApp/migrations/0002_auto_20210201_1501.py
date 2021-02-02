@@ -6,23 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('MainApp', '0001_initial'),
+        ("MainApp", "0001_initial"),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='movie',
-            old_name='title',
-            new_name='Title',
-        ),
-        migrations.RenameField(
-            model_name='movie',
-            old_name='type',
-            new_name='Type',
-        ),
-        migrations.RenameField(
-            model_name='movie',
-            old_name='year',
-            new_name='Year',
-        ),
+        migrations.RenameField(model_name="movie", old_name="title", new_name="Title",),
+        migrations.RenameField(model_name="movie", old_name="type", new_name="Type",),
+        migrations.RenameField(model_name="movie", old_name="year", new_name="Year",),
     ]

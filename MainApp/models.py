@@ -11,5 +11,3 @@ class Movie(models.Model):
 
     def is_object_exists(self):
         return bool(Movie.objects.filter(imdbID=self.imdbID))
-
-
