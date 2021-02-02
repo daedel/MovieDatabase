@@ -32,7 +32,10 @@
         <td>{{ movie.Year }}</td>
         <td>{{ movie.Type}}</td>
         <td>{{ movie.imdbID }}</td>
-        <td> <button type="button" class="btn btn-success">Add</button>
+        {%  if not movie.is_object_exists %}
+        <td> <a href="/movie/add/{{movie.imdbID}}" type="button" class="btn btn-success">Add to DB</a>
+        {%  endif %}
+
 </td>
     </tr>
 
