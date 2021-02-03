@@ -1,8 +1,7 @@
-from django import template
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -13,6 +12,7 @@ from MainApp.services import get_movie_info_by_title, get_movie_info_by_id
 
 
 class MainView(TemplateView):
+    PAGINATION_ITEMS_PER_PAGE = 5
     template_name = "index.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -22,8 +22,13 @@ class MainView(TemplateView):
             return {}
 
         page = self.request.GET.get("page")
-        per_page = self.request.GET.get("per_page", 3)
-        paginator = Paginator(get_movie_info_by_title(title), per_page)
+        per_page = self.request.GET.get("per_page", self.PAGINATION_ITEMS_PER_PAGE)
+
+        objects = get_movie_info_by_title(title)
+        if not objects:
+            return {}
+        
+        paginator = Paginator(objects, per_page)
 
         try:
             movie_info = paginator.page(page)
