@@ -7,8 +7,13 @@
 
 {% block content %}
     {%  if not user.is_authenticated %}
-        <li><a href="{% url 'login' %}">Sign in</a></li>
-        <li><a href="{% url 'signup' %}">Sign up</a></li>
+        <h5>To see content please sign in</h5>
+        <li style="list-style-type: none;"><a class="btn btn-info"  href="{% url 'login' %}">Sign in</a></li>
+        <div style="padding-top: 50px">
+            <h5>Register</h5>
+            <li style="list-style-type: none;"><a class="btn btn-info"href="{% url 'signup' %}">Sign up</a></li>
+        </div>
+
     {% else %}
         <form method="get" action=".">
             <input type="text" value="Type movie title" name="title">
@@ -50,9 +55,9 @@
     {% endif %}
     {% for i in movie_info.paginator.page_range %}
       {% if movie_info.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        <li class="active btn btn-info"><span>{{ i }} </span></li>
       {% else %}
-        <li><a href="?{% url_replace page=i %}">{{ i }}</a></li>
+        <li><a class="btn btn-light "href="?{% url_replace page=i %}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
     {% if movie_info.has_next %}
